@@ -1,5 +1,7 @@
 import pygame
+import Player
 
+all_sprites = pygame.sprite.Group()
 
 if __name__ == '__main__':
     pygame.init()
@@ -11,6 +13,9 @@ if __name__ == '__main__':
     running = True
     clock = pygame.time.Clock()
 
+    player = Player.Player(20, 100, 100)
+    all_sprites.add(player)
+
     while running:
         clock.tick(fps)
 
@@ -20,5 +25,7 @@ if __name__ == '__main__':
                 running = False
 
         screen.fill((0, 0, 0))
+        all_sprites.draw(screen)
+        all_sprites.update()
         pygame.display.flip()
     pygame.quit()
