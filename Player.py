@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, direction):
         self.dir = direction
+        print(direction)
 
     def update(self):
         if self.dir == "up":
