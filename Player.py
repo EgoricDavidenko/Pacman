@@ -30,4 +30,13 @@ class Player(pygame.sprite.Sprite):
             self.rect.x -= self.speed
         if self.dir == "right":
             self.rect.x += self.speed
+        if self.dir == "stop":
+            pass
+
+    def set_pos(self, x, y):
+        self.rect.x = x
+        self.rect.y = y
+
+    def stop(self):
+        self.dir = "stop"
 
