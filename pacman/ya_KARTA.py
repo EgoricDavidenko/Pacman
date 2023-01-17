@@ -36,3 +36,14 @@ boards = [
 [3, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 3],
 [7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8]
          ]
+a = []
+for i in range(len(boards)):
+    b = []
+    for j in range(len(boards[i])):
+        if i % 2 == 0 and j % 2 == 0 or i % 2 == 1 and j % 2 == 1:
+            b.append(1)
+        else:
+            b.append(2)
+    a.append(b)
+
+boards = a

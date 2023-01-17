@@ -1,5 +1,6 @@
 import pygame
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, radius, x, y):
         super().__init__()
@@ -23,7 +24,6 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         if self.dir == "up":
             self.rect.y -= self.speed
-            print("up")
         if self.dir == "down":
             self.rect.y += self.speed
         if self.dir == "left":
