@@ -9,7 +9,7 @@ import player
 pygame.init()
 
 WIDTH = 900
-HEIGHT = 1000
+HEIGHT = 1030
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 timer = pygame.time.Clock()
 fps = 120
@@ -69,6 +69,12 @@ while run:
     draw_board()
     all_sprites.update()
     all_sprites.draw(screen)
+
+    ###########################счёт############################################
+
+    screen.blit(player.draw_player(), (125, 125))
+
+    ###########################счёт############################################
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
