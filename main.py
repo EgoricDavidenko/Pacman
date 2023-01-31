@@ -1,4 +1,6 @@
 import copy
+
+import ghost
 from level1 import boards
 import pygame
 import math
@@ -16,13 +18,14 @@ PI = math.pi
 
 flicker = False
 
-player = player.Player(450, 663)
+player = player.Player()
+
+ghost1 = ghost.Ghost(0)
 
 all_sprites = pygame.sprite.Group()
 
 all_sprites.add(player)
-
-print(level[25][27])
+all_sprites.add(ghost1)
 
 def draw_board():
     rows = 33

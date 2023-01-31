@@ -1,13 +1,13 @@
 import pygame
-import  level1
-from level1 import boards
+import level1
 import copy
+import game_temp
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self):
         super().__init__()
 
-        self.level = copy.deepcopy(boards)
+        self.level = copy.deepcopy(level1.boards)
 
         self.player_images = []
         for i in range(1, 17):
@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         #                    (20, 20), 20)
         self.image = self.player_images[0]
 
-        self.rect = pygame.Rect(x, y, 40, 40)
+        self.rect = pygame.Rect(0, 0, 40, 40)
 
         # self.rect.x = x
         # self.rect.y = y
@@ -43,12 +43,13 @@ class Player(pygame.sprite.Sprite):
         self.prev_dir = self.dir
         self.dir = direction
 
-
     def update(self):
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
 
-        if self.start_game:
+        if game_temp.start_game != self.start_game:
+            game_temp.start_game = self.start_game
 
+        if self.start_game:
             if self.counter % 3 == 0:
                 self.counter = 0
                 if self.dir == "up":
