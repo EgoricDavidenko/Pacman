@@ -1,13 +1,15 @@
 import pygame
-import  level1
+import level1
 from level1 import boards
 import copy
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
 
         self.level = copy.deepcopy(boards)
+        self.schet = 0
 
         self.player_images = []
         for i in range(1, 17):
@@ -43,6 +45,8 @@ class Player(pygame.sprite.Sprite):
         self.prev_dir = self.dir
         self.dir = direction
 
+    def posle_togo_kak_pacman_syedaet_energeticheskuyu_tabletku(self):
+        print('призраки стали уязвимыми, скорее съешь их!')
 
     def update(self):
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
@@ -54,8 +58,6 @@ class Player(pygame.sprite.Sprite):
                 if self.dir == "up":
                     if self.level[self.my - 1][self.mx] in [0, 1, 2]:
                         self.prev_dir = "up"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
-                            level1.boards[self.my][self.mx] = 0
                         self.party -= 1
                         self.moving = "up"
                     else:
@@ -63,8 +65,6 @@ class Player(pygame.sprite.Sprite):
                 if self.dir == "down":
                     if self.level[self.my + 1][self.mx] in [0, 1, 2]:
                         self.prev_dir = "down"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
-                            level1.boards[self.my][self.mx] = 0
                         self.party += 1
                         self.moving = "down"
                     else:
@@ -72,22 +72,30 @@ class Player(pygame.sprite.Sprite):
                 if self.dir == "left":
                     if self.level[self.my][self.mx - 1] in [0, 1, 2]:
                         self.prev_dir = "left"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
-                            level1.boards[self.my][self.mx] = 0
                         self.partx -= 1
                         self.moving = "left"
                     else:
                         self.dir = self.prev_dir
                 if self.dir == "right":
                     if self.level[self.my][self.mx + 1] in [0, 1, 2]:
-                        self.prev_dir = "rught"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
-                            level1.boards[self.my][self.mx] = 0
+                        self.prev_dir = "right"
                         self.partx += 1
                         self.moving = "right"
                     else:
                         self.dir = self.prev_dir
+
+            ###########################счёт############################################
+
+            if self.level[self.my][self.mx] == 1:
+                level1.boards[self.my][self.mx] = 0
+                self.schet += 10
+            if self.level[self.my][self.mx] == 2:
+                level1.boards[self.my][self.mx] = 0
+                self.schet += 50
+                self.posle_togo_kak_pacman_syedaet_energeticheskuyu_tabletku()
             self.counter += 1
+
+            ###########################счёт############################################
 
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
         # print(self.coord_to_pos(self.mx, self.my))
@@ -104,6 +112,13 @@ class Player(pygame.sprite.Sprite):
 
     def draw_player(self):
         # 0-RIGHT, 1-LEFT, 2-UP, 3-DOWN
+        ###########################счёт############################################
+
+        font = pygame.font.Font(None, 100)
+        text = font.render(f'{self.schet}', True, (255, 255, 255))
+
+        ###########################счёт############################################
+
         if self.dir == "right":
             self.image = self.player_images[self.animation_counter // 5]
         elif self.dir == "left":
@@ -112,6 +127,8 @@ class Player(pygame.sprite.Sprite):
             self.image = self.player_images[self.animation_counter // 5 + 12]
         elif self.dir == "down":
             self.image = self.player_images[self.animation_counter // 5 + 4]
+
+        return text
 
     def coord_to_pos(self, mx, my):
         if self.partx == 6:
