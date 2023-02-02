@@ -12,7 +12,7 @@ WIDTH = 900
 HEIGHT = 1030
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 timer = pygame.time.Clock()
-fps = 120
+fps = 60
 level = copy.deepcopy(boards)
 PI = math.pi
 
@@ -72,7 +72,12 @@ while run:
 
     ###########################счёт############################################
 
-    screen.blit(player.draw_player(), (125, 125))
+    font = pygame.font.Font(None, 50)
+    if player.update() == 2620:
+        text1 = font.render(f'Вы победили!', True, (0, 255, 0))
+        screen.blit(text1, (600, 980))
+    text = font.render(f'Счёт: {player.update()}', True, (255, 255, 255))
+    screen.blit(text, (125, 980))
 
     ###########################счёт############################################
 

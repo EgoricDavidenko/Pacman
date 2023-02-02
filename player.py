@@ -21,6 +21,8 @@ class Player(pygame.sprite.Sprite):
 
         self.rect = pygame.Rect(0, 0, 40, 40)
 
+        self.schet = 0
+
         # self.rect.x = x
         # self.rect.y = y
 
@@ -55,8 +57,12 @@ class Player(pygame.sprite.Sprite):
                 if self.dir == "up":
                     if self.level[self.my - 1][self.mx] in [0, 1, 2]:
                         self.prev_dir = "up"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
+                        if level1.boards[self.my][self.mx] == 1:
+                            self.schet += 10
                             level1.boards[self.my][self.mx] = 0
+                        elif level1.boards[self.my][self.mx] == 2:
+                            level1.boards[self.my][self.mx] = 0
+                            self.schet += 50
                         self.party -= 1
                         self.moving = "up"
                     else:
@@ -64,8 +70,12 @@ class Player(pygame.sprite.Sprite):
                 if self.dir == "down":
                     if self.level[self.my + 1][self.mx] in [0, 1, 2]:
                         self.prev_dir = "down"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
+                        if level1.boards[self.my][self.mx] == 1:
+                            self.schet += 10
                             level1.boards[self.my][self.mx] = 0
+                        elif level1.boards[self.my][self.mx] == 2:
+                            level1.boards[self.my][self.mx] = 0
+                            self.schet += 50
                         self.party += 1
                         self.moving = "down"
                     else:
@@ -73,16 +83,24 @@ class Player(pygame.sprite.Sprite):
                 if self.dir == "left":
                     if self.level[self.my][self.mx - 1] in [0, 1, 2]:
                         self.prev_dir = "left"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
+                        if level1.boards[self.my][self.mx] == 1:
+                            self.schet += 10
                             level1.boards[self.my][self.mx] = 0
+                        elif level1.boards[self.my][self.mx] == 2:
+                            level1.boards[self.my][self.mx] = 0
+                            self.schet += 50
                         self.partx -= 1
                         self.moving = "left"
                     else:
                         self.dir = self.prev_dir
                 if self.dir == "right":
                     if self.level[self.my][self.mx + 1] in [0, 1, 2]:
-                        self.prev_dir = "rught"
-                        if self.level[self.my][self.mx] == 1 or self.level[self.my][self.mx] == 2:
+                        self.prev_dir = "right"
+                        if level1.boards[self.my][self.mx] == 1:
+                            self.schet += 10
+                            level1.boards[self.my][self.mx] = 0
+                        elif level1.boards[self.my][self.mx] == 2:
+                            self.schet += 50
                             level1.boards[self.my][self.mx] = 0
                         self.partx += 1
                         self.moving = "right"
@@ -102,6 +120,7 @@ class Player(pygame.sprite.Sprite):
             self.flicker = True
 
         self.draw_player()
+        return self.schet
 
     def draw_player(self):
         # 0-RIGHT, 1-LEFT, 2-UP, 3-DOWN
