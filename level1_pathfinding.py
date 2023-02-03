@@ -1,20 +1,19 @@
-boards = [[1, 1, 1, 1, 1, 1, 1],
-          [1, -1, -1, -1, "x", -1, 1],
-          [1, -1, -1, -1, -1, 1, 1],
-          [1, -1, 1, 1, 1, -1, 1],
-          [1, -1, "y", 1, -1, 1, 1],
-          [1, -1, -1, -1, -1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 1]]
+import level1
+import game_temp
 
-player_mas = boards.copy()
+player_mas = level1.boards.copy()
 
-for i in range(len(player_mas)):
-    for j in range(len(player_mas)):
-        if player_mas[i][j] == 1:
-            player_mas[i][j] = 9999
+player_mas[game_temp.player_y - 1][game_temp.player_x - 1] = "y"
+
+for i in range(33):
+    player_mas[i].append(0)
+    player_mas[i].insert(0, 0)
+    for j in range(30):
+        if player_mas[i][j] in [0, 1, 2]:
+            player_mas[i][j] = 0
+
 
 def path(i, j, last, prev_dir, first_time = False):
-    print(123)
     if player_mas[i][j] != "x":
         if player_mas[i][j] != "y":
             if player_mas[i][j] == -1:
@@ -57,6 +56,9 @@ def path(i, j, last, prev_dir, first_time = False):
     return 0
 
 
-path(1, 4, 0, "no", first_time=True)
+path(16, 15, 0, "no", first_time=True)
+
+player_mas[16][15] = "x"
+
 for i in player_mas:
     print(i)

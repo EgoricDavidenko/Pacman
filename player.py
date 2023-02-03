@@ -138,21 +138,27 @@ class Player(pygame.sprite.Sprite):
             self.mx += 1
             if self.mx >= 29:
                 self.mx = 0
+                game_temp.player_x = 0
             mx += 1
+            game_temp.player_x += 1
             self.partx = 0
         if self.partx == -6:
             self.mx -= 1
             if self.mx <= 0:
                 self.mx = 29
+                game_temp.player_x = 29
             mx -= 1
+            game_temp.player_x -= 1
             self.partx = 0
         if self.party == 6:
             self.my += 1
             my += 1
+            game_temp.player_y += 1
             self.party = 0
         if self.party == -6:
             self.my -= 1
             my -= 1
+            game_temp.player_y -= 1
             self.party = 0
 
         return mx * 30 + self.partx * 5, my * 30 + self.party * 5
