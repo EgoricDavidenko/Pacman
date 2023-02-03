@@ -20,7 +20,7 @@ def level_menu():
     mainmenu._open(level)
 
 
-mainmenu = pygame_menu.Menu('Pac-Man', 600, 400, theme=themes.THEME_SOLARIZED)
+mainmenu = pygame_menu.Menu('Pac-Man', 600, 400, theme=themes.THEME_DARK)
 # mainmenu.add.text_input('Name: ', default='username', maxchar=20)
 mainmenu.add.button('Play', start_the_game)
 mainmenu.add.button('Info', level_menu)
