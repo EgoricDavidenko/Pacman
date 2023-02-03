@@ -136,10 +136,14 @@ class Player(pygame.sprite.Sprite):
     def coord_to_pos(self, mx, my):
         if self.partx == 6:
             self.mx += 1
+            if self.mx >= 29:
+                self.mx = 0
             mx += 1
             self.partx = 0
-        elif self.partx == -6:
+        if self.partx == -6:
             self.mx -= 1
+            if self.mx <= 0:
+                self.mx = 29
             mx -= 1
             self.partx = 0
         if self.party == 6:
