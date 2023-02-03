@@ -38,7 +38,6 @@ class Ghost(pygame.sprite.Sprite):
         if direction == "up":
             self.party -= 1
 
-
     def update(self):
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
 
