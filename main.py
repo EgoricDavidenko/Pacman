@@ -1,8 +1,8 @@
 import copy
 
+import pygame
 import ghost
 from level1 import boards
-import pygame
 import math
 import player
 
