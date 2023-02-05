@@ -6,7 +6,11 @@ from level1 import boards
 import math
 import player
 
+pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
+
+pygame.mixer.music.load("sounds/pac-man_song.mp3")
+pygame.mixer.music.play(-1)
 
 WIDTH = 900
 HEIGHT = 1030
@@ -15,6 +19,7 @@ timer = pygame.time.Clock()
 fps = 60
 level = copy.deepcopy(boards)
 PI = math.pi
+
 
 flicker = False
 
