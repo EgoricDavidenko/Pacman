@@ -66,6 +66,7 @@ def draw_board():
 
 
 
+
 run = True
 while run:
     timer.tick(fps)
