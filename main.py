@@ -9,8 +9,8 @@ import player
 pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
 
-pygame.mixer.music.load("sounds/pac-man_song.mp3")
-pygame.mixer.music.play(-1)
+# pygame.mixer.music.load("sounds/pac-man_song.mp3")
+# pygame.mixer.music.play(-1)
 
 WIDTH = 900
 HEIGHT = 1030
@@ -25,12 +25,14 @@ flicker = False
 
 player = player.Player()
 
-ghost1 = ghost.Ghost(0)
+ghost1 = ghost.Ghost(0, 15, 6, "horizontal", 12, 12)
+ghost2 = ghost.Ghost(0, 22, 16, "vertical", 8, 10)
 
 all_sprites = pygame.sprite.Group()
 
 all_sprites.add(player)
 all_sprites.add(ghost1)
+all_sprites.add(ghost2)
 
 def draw_board():
     rows = 33
