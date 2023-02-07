@@ -29,10 +29,12 @@ def PacMan(player):
 
     player = player.Player()
 
-    ghost1 = ghost.Ghost(0, 2, 6, "horizontal", 0, 25)
-    ghost2 = ghost.Ghost(2, 22, 2, "vertical", 25, 0)
-    ghost3 = ghost.Ghost(3, 27, 30, "horizontal", 25, 0)
-    ghost4 = ghost.Ghost(4, 7, 27, "vertical", 0, 25)
+  #  px, py = player.update()[1], player.update()[2]
+
+    ghost1 = ghost.Ghost(0, 2, 6, "horizontal", 0, 25)    # , px, py
+    ghost2 = ghost.Ghost(2, 22, 2, "vertical", 25, 0)  # , px, py
+    ghost3 = ghost.Ghost(3, 27, 30, "horizontal", 25, 0)   # , px, py
+    ghost4 = ghost.Ghost(4, 7, 27, "vertical", 0, 25)   # , px, py
 
     all_sprites = pygame.sprite.Group()
 
@@ -74,10 +76,8 @@ def PacMan(player):
                     pygame.draw.line(screen, 'white', (j * 30, i * 30 + (0.5 * 30)),
                                      (j * 30 + 30, i * 30 + (0.5 * 30)), 3)
 
-
     run = True
     while run:
-
         timer.tick(fps)
 
         screen.fill('black')
@@ -91,7 +91,7 @@ def PacMan(player):
         if player.update() == 2620:
             text1 = font.render(f'Вы победили!', True, (0, 255, 0))
             screen.blit(text1, (600, 980))
-        text = font.render(f'Счёт: {player.update()}', True, (255, 255, 255))
+        text = font.render(f'Счёт: {player.update()[0]}', True, (255, 255, 255))
         screen.blit(text, (125, 980))
 
         ###########################счёт############################################

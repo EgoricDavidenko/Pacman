@@ -3,6 +3,7 @@ import level1
 import copy
 import game_temp
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -13,10 +14,6 @@ class Player(pygame.sprite.Sprite):
         for i in range(1, 17):
             self.player_images.append(pygame.transform.scale(pygame.image.load(f'player_images/{i}.png'), (30, 30)))
 
-        # self.image = pygame.Surface((2 * 20, 2 * 20),
-        #                             pygame.SRCALPHA, 32)
-        # pygame.draw.circle(self.image, pygame.Color("yellow"),
-        #                    (20, 20), 20)
         self.image = self.player_images[0]
 
         self.rect = pygame.Rect(0, 0, 40, 40)
@@ -26,7 +23,7 @@ class Player(pygame.sprite.Sprite):
         # self.rect.x = x
         # self.rect.y = y
 
-        self.mx = 15 # !!! normal cords in our opinion -1
+        self.mx = 15  # !!! normal cords in our opinion -1
         self.my = 24
         self.partx = 0
         self.party = 0
@@ -120,7 +117,7 @@ class Player(pygame.sprite.Sprite):
             self.flicker = True
 
         self.draw_player()
-        return self.schet
+        return self.schet, self.mx, self.my
 
     def draw_player(self):
         # 0-RIGHT, 1-LEFT, 2-UP, 3-DOWN

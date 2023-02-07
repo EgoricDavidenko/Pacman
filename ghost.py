@@ -4,13 +4,17 @@ import game_temp
 import level1
 import copy
 import game_temp
+from player import Player as player
 
 
 class Ghost(pygame.sprite.Sprite):
-    def __init__(self, number, x, y, movement_direction, offset_left, offset_right):  # right = up, left = down
+    def __init__(self, number, x, y, movement_direction, offset_left, offset_right):  # right = up, left = down             # , px, py
         super(Ghost, self).__init__().__init__()
 
         self.level = copy.deepcopy(level1.boards)
+
+   #     px, py = player.update(self)[1], player.update(self)[2]
+   #     self.px, self.py = px, py
 
         self.ghost_images = []
         for i in range(1, 6):
@@ -70,6 +74,7 @@ class Ghost(pygame.sprite.Sprite):
 
 
     def update(self):
+        # print(self.px, self.py)
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
 
         if game_temp.start_game:
@@ -79,6 +84,7 @@ class Ghost(pygame.sprite.Sprite):
 
         self.counter += 1
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
+        return self.mx, self.my
 
     def coord_to_pos(self, mx, my):
         if self.partx == 6:
