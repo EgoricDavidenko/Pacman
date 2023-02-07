@@ -9,8 +9,8 @@ import player
 pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
 
-# pygame.mixer.music.load("sounds/pac-man_song.mp3")
-# pygame.mixer.music.play(-1)
+pygame.mixer.music.load("sounds/1-track-1.mp3")
+pygame.mixer.music.play(-1)
 
 WIDTH = 900
 HEIGHT = 1030
