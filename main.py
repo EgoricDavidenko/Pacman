@@ -20,7 +20,7 @@ def PacMan(player):
     HEIGHT = 1030
     screen = pygame.display.set_mode([WIDTH, HEIGHT])
     timer = pygame.time.Clock()
-    fps = 360
+    fps = 60
     level = copy.deepcopy(boards)
     PI = math.pi
 
