@@ -67,8 +67,6 @@ def draw_board():
                                  (j * 30 + 30, i * 30 + (0.5 * 30)), 3)
 
 
-
-
 run = True
 while run:
     timer.tick(fps)
