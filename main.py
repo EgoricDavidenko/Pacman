@@ -30,13 +30,17 @@ def PacMan(player):
     player = player.Player()
 
     ghost1 = ghost.Ghost(0, 15, 6, "horizontal", 12, 12)
-    ghost2 = ghost.Ghost(3, 22, 16, "vertical", 8, 10)
+    ghost2 = ghost.Ghost(2, 22, 16, "vertical", 8, 10)
+    ghost3 = ghost.Ghost(3, 15, 6, "horizontal", 22, 12)
+    ghost4 = ghost.Ghost(4, 22, 16, "vertical", 18, 10)
 
     all_sprites = pygame.sprite.Group()
 
     all_sprites.add(player)
     all_sprites.add(ghost1)
     all_sprites.add(ghost2)
+    all_sprites.add(ghost3)
+    all_sprites.add(ghost4)
 
     def draw_board():
         rows = 33

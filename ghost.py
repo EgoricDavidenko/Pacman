@@ -46,6 +46,7 @@ class Ghost(pygame.sprite.Sprite):
                 if self.temp_x < self.offset_right * 6:
                     self.partx += 1
                     self.temp_x += 1
+                    print(self.temp_x)
                 else:
                     self.dir = "left"
             elif self.dir == "left":
