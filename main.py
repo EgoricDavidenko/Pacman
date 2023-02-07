@@ -20,7 +20,7 @@ def PacMan(player):
     HEIGHT = 1030
     screen = pygame.display.set_mode([WIDTH, HEIGHT])
     timer = pygame.time.Clock()
-    fps = 60
+    fps = 360
     level = copy.deepcopy(boards)
     PI = math.pi
 
@@ -29,10 +29,10 @@ def PacMan(player):
 
     player = player.Player()
 
-    ghost1 = ghost.Ghost(0, 15, 6, "horizontal", 12, 12)
-    ghost2 = ghost.Ghost(2, 22, 16, "vertical", 8, 10)
-    ghost3 = ghost.Ghost(3, 15, 6, "horizontal", 22, 12)
-    ghost4 = ghost.Ghost(4, 22, 16, "vertical", 18, 10)
+    ghost1 = ghost.Ghost(0, 2, 6, "horizontal", 0, 25)
+    ghost2 = ghost.Ghost(2, 22, 2, "vertical", 25, 0)
+    ghost3 = ghost.Ghost(3, 27, 30, "horizontal", 25, 0)
+    ghost4 = ghost.Ghost(4, 7, 27, "vertical", 0, 25)
 
     all_sprites = pygame.sprite.Group()
 
