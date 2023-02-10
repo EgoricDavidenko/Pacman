@@ -13,7 +13,7 @@ for i in range(33):
             player_mas[i][j] = 0
 
 
-def path(i, j, last, prev_dir, first_time = False):
+def path(i, j, last, prev_dir, first_time=False):  #
     if player_mas[i][j] != "x":
         if player_mas[i][j] != "y":
             if player_mas[i][j] == -1:
@@ -59,6 +59,3 @@ def path(i, j, last, prev_dir, first_time = False):
 path(16, 15, 0, "no", first_time=True)
 
 player_mas[16][15] = "x"
-
-for i in player_mas:
-    print(i)

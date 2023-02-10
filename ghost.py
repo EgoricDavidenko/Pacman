@@ -1,20 +1,16 @@
 import pygame
 
-import game_temp
+from level1 import boards
 import level1
 import copy
 import game_temp
-from player import Player as player
 
 
 class Ghost(pygame.sprite.Sprite):
-    def __init__(self, number, x, y, movement_direction, offset_left, offset_right):  # right = up, left = down             # , px, py
+    def __init__(self, number, x, y, movement_direction, offset_left, offset_right):
         super(Ghost, self).__init__().__init__()
 
         self.level = copy.deepcopy(level1.boards)
-
-   #     px, py = player.update(self)[1], player.update(self)[2]
-   #     self.px, self.py = px, py
 
         self.ghost_images = []
         for i in range(1, 6):
@@ -26,6 +22,8 @@ class Ghost(pygame.sprite.Sprite):
 
         self.mx = x
         self.my = y
+        self.lastmx = self.mx
+        self.lastmy = self.my
         self.partx = 0
         self.party = 0
         self.movement_direction = movement_direction
@@ -72,21 +70,23 @@ class Ghost(pygame.sprite.Sprite):
                 else:
                     self.dir = "up"
 
-
     def update(self):
         # print(self.px, self.py)
+        boards[self.lastmy][self.lastmx] = int(str(boards[self.lastmy][self.lastmx]).rstrip('-'))
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
 
         if game_temp.start_game:
             if self.counter % 3 == 0:
                 self.move()
 
-
         self.counter += 1
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
-        return self.mx, self.my
+
+        if '-' not in str(boards[self.my][self.mx]):
+            boards[self.my][self.mx] = str(boards[self.my][self.mx]) + '-'
 
     def coord_to_pos(self, mx, my):
+        self.lastmx, self.lastmy = self.mx, self.my
         if self.partx == 6:
             self.mx += 1
             mx += 1

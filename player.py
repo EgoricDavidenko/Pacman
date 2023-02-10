@@ -5,7 +5,7 @@ import game_temp
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, schet):
         super().__init__()
 
         self.level = copy.deepcopy(level1.boards)
@@ -17,13 +17,9 @@ class Player(pygame.sprite.Sprite):
         self.image = self.player_images[0]
 
         self.rect = pygame.Rect(0, 0, 40, 40)
+        self.schet = schet
 
-        self.schet = 0
-
-        # self.rect.x = x
-        # self.rect.y = y
-
-        self.mx = 15  # !!! normal cords in our opinion -1
+        self.mx = 15
         self.my = 24
         self.partx = 0
         self.party = 0
@@ -43,6 +39,7 @@ class Player(pygame.sprite.Sprite):
         self.dir = direction
 
     def update(self):
+        death = False
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
 
         if game_temp.start_game != self.start_game:
@@ -103,6 +100,8 @@ class Player(pygame.sprite.Sprite):
                         self.moving = "right"
                     else:
                         self.dir = self.prev_dir
+            if '-' in str(level1.boards[self.my][self.mx]):
+                death = True
             self.counter += 1
 
         self.rect.x, self.rect.y = self.coord_to_pos(self.mx, self.my)
@@ -117,7 +116,7 @@ class Player(pygame.sprite.Sprite):
             self.flicker = True
 
         self.draw_player()
-        return self.schet, self.mx, self.my
+        return self.schet, self.mx, self.my, death
 
     def draw_player(self):
         # 0-RIGHT, 1-LEFT, 2-UP, 3-DOWN

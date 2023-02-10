@@ -1,15 +1,55 @@
-import copy
+import pygame_menu
+from pygame_menu import themes
 
-import pygame
 import ghost
 from level1 import boards
 import math
 import player as player
 import pygame
-import pygame_menu
-from pygame_menu import themes
-# import main
+
+dc = 0
+schet = 0
+
+
+def you_dead(screen):
+    global dc, schet, run
+    dc += 1
+    if dc >= 3:
+        death = True
+        while death:
+            screen.fill((0, 0, 0))
+            font = pygame.font.Font(None, 50)
+            text = font.render(f'Game Over', True, (255, 255, 255))
+            screen.blit(text, (370, 450))
+            pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    death = False
+    for i in range(len(boards)):
+        for j in range(len(boards[i])):
+            if '-' in str(boards[i][j]):
+                boards[i][j] = int(boards[i][j].rstrip('-'))
+    PacMan(player)
+
+
+def you_winner(screen):
+    global dc, schet, run
+    win = True
+    while win:
+        screen.fill((0, 0, 0))
+        font = pygame.font.Font(None, 50)
+        text = font.render(f'Вы победили!', True, (0, 255, 0))
+        screen.blit(text, (370, 450))
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                win = False
+                dc = 3
+    run = False
+
+
 def PacMan(player):
+    global dc, schet, run
     pygame.mixer.pre_init(44100, -16, 1, 512)
     pygame.init()
 
@@ -21,15 +61,11 @@ def PacMan(player):
     screen = pygame.display.set_mode([WIDTH, HEIGHT])
     timer = pygame.time.Clock()
     fps = 60
-    level = copy.deepcopy(boards)
     PI = math.pi
-
 
     flicker = False
 
-    player = player.Player()
-
-  #  px, py = player.update()[1], player.update()[2]
+    player = player.Player(schet)
 
     ghost1 = ghost.Ghost(0, 2, 6, "horizontal", 0, 25)    # , px, py
     ghost2 = ghost.Ghost(2, 22, 2, "vertical", 25, 0)  # , px, py
@@ -77,7 +113,14 @@ def PacMan(player):
                                      (j * 30 + 30, i * 30 + (0.5 * 30)), 3)
 
     run = True
+    if dc == 3:
+        run = False
     while run:
+        schet = player.update()[0]
+        if player.update()[3]:
+            you_dead(screen)
+            run = False
+            break
         timer.tick(fps)
 
         screen.fill('black')
@@ -85,16 +128,11 @@ def PacMan(player):
         all_sprites.update()
         all_sprites.draw(screen)
 
-        ###########################счёт############################################
-
         font = pygame.font.Font(None, 50)
-        if player.update() == 2620:
-            text1 = font.render(f'Вы победили!', True, (0, 255, 0))
-            screen.blit(text1, (600, 980))
-        text = font.render(f'Счёт: {player.update()[0]}', True, (255, 255, 255))
+        text = font.render(f'Счёт: {schet}', True, (255, 255, 255))
         screen.blit(text, (125, 980))
-
-        ###########################счёт############################################
+        if schet == 260:
+            you_winner(screen)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -131,8 +169,8 @@ def start_the_game():
 def level_menu():
     mainmenu._open(level)
 
+
 mainmenu = pygame_menu.Menu('Pac-Man', 900, 1030, theme=themes.THEME_DARK)
-# mainmenu.add.text_input('Name: ', default='username', maxchar=20)
 mainmenu.add.button('Play', start_the_game)
 mainmenu.add.button('Info', level_menu)
 mainmenu.add.button('Quit', pygame_menu.events.EXIT)
@@ -140,9 +178,15 @@ mainmenu.add.button('Quit', pygame_menu.events.EXIT)
 level = pygame_menu.Menu('Pac-Man от Егоров и Арсения', 900, 1030)
 level.add.label('Для передвижения используйте стрелочки')
 level.add.label('Для выхода из игры закройте окно с ней')
-# level.add.selector('Difficulty :', [('Hard', 1), ('Easy', 2)], onchange=set_difficulty)
 
 mainmenu.mainloop(surface)
+
+
+
+
+
+
+
 
 
 

@@ -13,8 +13,8 @@ for i in range(len(player_mas)):
         if player_mas[i][j] == 1:
             player_mas[i][j] = 9999
 
+
 def path(i, j, last, prev_dir, first_time = False):
-    print(123)
     if player_mas[i][j] != "x":
         if player_mas[i][j] != "y":
             if player_mas[i][j] == -1:
@@ -38,19 +38,13 @@ def path(i, j, last, prev_dir, first_time = False):
             else:
                 return 0
         else:
-            print(f"boards[{i}][{j}]")
             return 0
     else:
         if first_time:
-            print(1)
             path(i - 1, j, last + 1, "up")
-            print(2)
             path(i + 1, j, last + 1, "down")
-            print(3)
             path(i, j - 1, last + 1, "left")
-            print(4)
             path(i, j + 1, last + 1, "right")
-            print(5)
         else:
             return 0
 
@@ -58,5 +52,4 @@ def path(i, j, last, prev_dir, first_time = False):
 
 
 path(1, 4, 0, "no", first_time=True)
-for i in player_mas:
-    print(i)
+
