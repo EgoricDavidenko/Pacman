@@ -131,7 +131,7 @@ def PacMan(player):
         font = pygame.font.Font(None, 50)
         text = font.render(f'Счёт: {schet}', True, (255, 255, 255))
         screen.blit(text, (125, 980))
-        if schet == 260:
+        if schet == 2460:
             you_winner(screen)
 
         for event in pygame.event.get():
